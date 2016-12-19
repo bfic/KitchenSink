@@ -1,0 +1,55 @@
+﻿<link rel="import" href="/sys/polymer/polymer.html">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+
+<style>
+    .fa {
+        color: #666;
+        transition: color 200ms ease-out;
+    }
+
+    .btn-default:hover, .btn-default:active:hover {
+        background-color: #f0f0f0;
+    }
+
+    .btn-default:hover .fa, .btn-default:active:hover .fa {
+        color: seagreen;
+        transition: color 300ms ease-out;
+    }
+</style>
+
+<template>
+    <template is="dom-bind">
+        <h5>Sortable list</h5>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Move up</th>
+                    <th>Move down</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template is="dom-repeat" items="{{model.People}}">
+                    <tr>
+                        <td>{{item.Name}}</td>
+                        <td>
+                            <template is="dom-if" if="{{item.UPVisible$}}">
+                                <button class="btn btn-sm btn-default" value="{{model.ChangeOrderUp$::click}}" onmousedown="this.value = 'UP'">
+                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                </button>
+                            </template>
+                        </td>
+                        <td>
+                            <template is="dom-if" if="{{item.DOWNVisible$}}">
+                                <button class="btn btn-sm btn-default" value="{{model.ChangeOrderDown$::click}}" onmousedown="this.value = 'DOWN'">
+                                    <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+                                </button>
+                            </template>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </template>
+</template>
